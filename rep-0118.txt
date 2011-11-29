@@ -23,8 +23,8 @@ Developers of packages aimed at humanoids robots need a shared
 convention for coordinate frames in order to better integrate and
 re-use software components.
 
-The REP 105 [2] already defines frames for mobile bases. This REP is
-both compatible with REP 105 [2] and extends it to label other
+The REP 105 [2] already defines frames for mobile bases. This REP
+both remains compatible with REP 105 [2] and extends it to label other
 important locations on a humanoid robot such as the gaze (head), left
 and right wrists, hands and feet.
 
@@ -108,7 +108,7 @@ frame for the right leg.
 left_toe and right_toe
 ''''''''''''''''''''''
 
-The coordinate frame called ``left_te`` defines the position and
+The coordinate frame called ``left_toe`` defines the position and
 orientation of the left leg toe body. The (X,Y) plan of this frame
 must be coplanar with the toe body contact surface. It is recommended
 to choose the origin as the projection of the body center on the
@@ -152,8 +152,8 @@ Frame Hierarchy
 Frame Authorities
 -----------------
 
-Unlike mobile bases, on humanoids robots the transformation from
-``base_link`` to ``base_footprint`` is not rigid and is broadcasted by
+Unlike mobile bases, the transformation from ``base_link`` to
+``base_footprint`` is not rigid on humanoid robots and is broadcasted by
 an external node.
 
 
