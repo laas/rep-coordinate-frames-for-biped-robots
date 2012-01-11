@@ -1,5 +1,5 @@
 REP: 118
-Title: Coordinate Frames for Humanoids robots
+Title: Coordinate Frames for Humanoids Robots
 Version: $Revision: 1 $
 Last-Modified: $Date: 2012-01-11 11:53:00 +0200 (Wed, 11 Jan 2012) $
 Author: Thomas Moulard <thomas.moulard@gmail.com>
