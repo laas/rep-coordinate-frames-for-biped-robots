@@ -1,5 +1,5 @@
 REP: 118
-Title: Coordinate Frames for Biped robots
+Title: Coordinate Frames for Humanoids robots
 Version: $Revision: 1 $
 Last-Modified: $Date: 2012-01-11 11:53:00 +0200 (Wed, 11 Jan 2012) $
 Author: Thomas Moulard <thomas.moulard@gmail.com>
@@ -14,7 +14,7 @@ Abstract
 ========
 
 This REP specifies naming conventions and semantic meaning for
-coordinate frames of legged robots used within ROS.
+coordinate frames of humanoids robots used within ROS.
 
 Motivation
 ==========
