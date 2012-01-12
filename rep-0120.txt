@@ -52,70 +52,71 @@ base_footprint
 The coordinate frame called ``base_footprint`` projects the
 ``base_link`` position on the floor.
 
-left_wrist and right_wrist
-''''''''''''''''''''''''''
+l_wrist and r_wrist
+'''''''''''''''''''
 
-The coordinate frame called ``left_wrist`` defines the position and
+The coordinate frame called ``l_wrist`` defines the position and
 orientation of the left arm regardless of the tool (grasping device
 for instance) attached to it.
 
-The coordinate frame called ``right_wrist`` defines the equivalent
+The coordinate frame called ``r_wrist`` defines the equivalent
 frame for the right arm.
 
 
-left_hand and right_hand
-''''''''''''''''''''''''
+l_hand and r_hand
+'''''''''''''''''
 
-The coordinate frame called ``left_hand`` defines the position and
+The coordinate frame called ``l_hand`` defines the position and
 orientation of the left arm end effector.
 
 If the end effector is a grasping device, the frame should be located
-at the recommended object grasping location. The frame orientation is
-defined as X the axis which should be collinear with the object axis
-during the grasping process, Y the axis going "toward" the reached
-object and Z the axis orthogonal to the (X,Y) plan.
+at the recommended object grasping location.  In this particular case,
+the frame orientation is defined as follow. The X axis should be
+collinear with the grasped object principal axis. For instance, when
+grasping a bottle, the X axis would be vertical. The Y axis is going
+"toward" the reached object and Z is orthogonal to the (X,Y) plan.
 
 
-The coordinate frame called ``right_wrist`` defines the equivalent
-frame for the right arm.
+The coordinate frame called ``r_hand`` defines the equivalent frame
+for the right arm.
 
 
-left_ankle and right_ankle
-''''''''''''''''''''''''''
+l_ankle and r_ankle
+'''''''''''''''''''
 
-The coordinate frame called ``left_ankle`` defines the position and
+The coordinate frame called ``l_ankle`` defines the position and
 orientation of the left leg regardless of the support body geometry.
 
 
-The coordinate frame called ``right_ankle`` defines the equivalent
+The coordinate frame called ``r_ankle`` defines the equivalent
 frame for the right leg.
 
 
-left_sole and right_sole
-''''''''''''''''''''''''
+l_sole and r_sole
+'''''''''''''''''
 
-The coordinate frame called ``left_sole`` defines the position and
+The coordinate frame called ``l_sole`` defines the position and
 orientation of the left leg support body. The (X,Y) plan of this frame
 must be coplanar with the support body contact surface. It is
 recommended to choose the origin as the projection of the body center
 on the contact surface.
 
 
-The coordinate frame called ``right_sole`` defines the equivalent
+The coordinate frame called ``r_sole`` defines the equivalent
 frame for the right leg.
 
 
-left_toe and right_toe
-''''''''''''''''''''''
+l_toe and r_toe
+'''''''''''''''
 
-The coordinate frame called ``left_toe`` defines the position and
+The coordinate frame called ``l_toe`` defines the position and
 orientation of the left leg toe body. The (X,Y) plan of this frame
 must be coplanar with the toe body contact surface. It is recommended
 to choose the origin as the projection of the body center on the
 contact surface.
 
 
-The coordinate frame called ``right_toe`` defines the equivalent frame
+The coordinate frame called ``r_toe`` defines the equivalent frame
 for the right leg.
 
 
@@ -123,14 +124,15 @@ gaze
 ''''
 
 The coordinate frame called ``gaze`` defines the head position and
-orientation regardless of any sensors (camera for instance).
+orientation. The orientation indicates in which direction the head
+appears to be looking regardless of any sensors (camera for instance).
 
 
 chest
 '''''
 
 The coordinate frame called ``chest`` is attached to the lowest body
-of the model which is a parent of ``left_hand``, ``right_hand`` and
+of the model which is a parent of ``l_hand``, ``r_hand`` and
 ``gaze``.
 
 
@@ -143,18 +145,17 @@ See REP 105 [1] for ``map`` and ``odom`` frames definition.
 Frame Hierarchy
 ---------------
 
-``base_link`` <-- ``chest`` <-- ``gaze``
-``base_link`` <-- ``chest`` <-- ``left_wrist`` <-- ``left_hand``
-``base_link`` <-- ``chest`` <-- ``right_wrist`` <-- ``right_hand``
-``base_link`` <-- ``left_ankle`` <-- ``left_sole`` <-- ``left_toe``
-``base_link`` <-- ``right_ankle`` <-- ``right_sole`` <-- ``right_toe``
+- ``base_link`` <-- ``chest`` <-- ``gaze``
+- ``base_link`` <-- ``chest`` <-- ``l_wrist`` <-- ``l_hand``
+- ``base_link`` <-- ``chest`` <-- ``r_wrist`` <-- ``r_hand``
+- ``base_link`` <-- ``l_ankle`` <-- ``l_sole`` <-- ``l_toe``
+- ``base_link`` <-- ``r_ankle`` <-- ``r_sole`` <-- ``r_toe``
 
 Frame Authorities
 -----------------
 
-Unlike mobile bases, the transformation from ``base_link`` to
-``base_footprint`` is not rigid on humanoid robots and is broadcasted by
-an external node.
+The transformation from ``base_link`` to ``base_footprint`` is not
+rigid on humanoid robots and is broadcasted by an external node.
 
 
 Exceptions
