@@ -404,7 +404,7 @@ ul.auto-toc {
 <li><a class="reference internal" href="#base-link" id="id7">base_link</a></li>
 <li><a class="reference internal" href="#base-footprint" id="id8">base_footprint</a></li>
 <li><a class="reference internal" href="#l-wrist-and-r-wrist" id="id9">l_wrist and r_wrist</a></li>
-<li><a class="reference internal" href="#l-hand-and-r-hand" id="id10">l_hand and r_hand</a></li>
+<li><a class="reference internal" href="#l-gripper-and-r-gripper" id="id10">l_gripper and r_gripper</a></li>
 <li><a class="reference internal" href="#l-ankle-and-r-ankle" id="id11">l_ankle and r_ankle</a></li>
 <li><a class="reference internal" href="#l-sole-and-r-sole" id="id12">l_sole and r_sole</a></li>
 <li><a class="reference internal" href="#l-toe-and-r-toe" id="id13">l_toe and r_toe</a></li>
@@ -472,16 +472,18 @@ for instance) attached to it.</p>
 <p>The coordinate frame called <tt class="docutils literal">r_wrist</tt> defines the equivalent
 frame for the right arm.</p>
 </div>
-<div class="section" id="l-hand-and-r-hand">
-<h3><a class="toc-backref" href="#id10">l_hand and r_hand</a></h3>
-<p>The coordinate frame called <tt class="docutils literal">l_hand</tt> defines the position and
+<div class="section" id="l-gripper-and-r-gripper">
+<h3><a class="toc-backref" href="#id10">l_gripper and r_gripper</a></h3>
+<p>The coordinate frame called <tt class="docutils literal">l_gripper</tt> defines the position and
 orientation of the left arm end effector.</p>
 <p>If the end effector is a grasping device, the frame should be located
 at the recommended object grasping location. The frame orientation is
 defined as X the axis which should be collinear with the object axis
 during the grasping process, Y the axis going &quot;toward&quot; the reached
 object and Z the axis orthogonal to the (X,Y) plan.</p>
-<p>The coordinate frame called <tt class="docutils literal">r_hand</tt> defines the equivalent frame
+<img alt="Gripper frame (Y, Z) plane" src="rep-0120-1.jpg" style="width: 375.0px; height: 410.0px;" />
+<img alt="Gripper frame (X, Y) plane" src="rep-0120-2.jpg" style="width: 553.5px; height: 515.0px;" />
+<p>The coordinate frame called <tt class="docutils literal">r_gripper</tt> defines the equivalent frame
 for the right arm.</p>
 </div>
 <div class="section" id="l-ankle-and-r-ankle">
@@ -521,7 +523,7 @@ appears to be looking regardless of any sensors (camera for instance).</p>
 <div class="section" id="torso">
 <h3><a class="toc-backref" href="#id15">torso</a></h3>
 <p>The coordinate frame called <tt class="docutils literal">torso</tt> is attached to the lowest body
-of the model which is a parent of <tt class="docutils literal">l_hand</tt>, <tt class="docutils literal">r_hand</tt> and
+of the model which is a parent of <tt class="docutils literal">l_gripper</tt>, <tt class="docutils literal">r_gripper</tt> and
 <tt class="docutils literal">gaze</tt>.</p>
 </div>
 <div class="section" id="map-and-odom">
@@ -543,7 +545,7 @@ of the model which is a parent of <tt class="docutils literal">l_hand</tt>, <tt 
 <dt>torso</dt>
 <dd><ul class="first last simple">
 <li>... - gaze</li>
-<li>... - (l|r)_wrist - (l|r)_hand</li>
+<li>... - (l|r)_wrist - (l|r)_gripper</li>
 </ul>
 </dd>
 </dl>
