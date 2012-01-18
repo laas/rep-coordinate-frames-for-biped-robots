@@ -409,7 +409,7 @@ ul.auto-toc {
 <li><a class="reference internal" href="#l-sole-and-r-sole" id="id12">l_sole and r_sole</a></li>
 <li><a class="reference internal" href="#l-toe-and-r-toe" id="id13">l_toe and r_toe</a></li>
 <li><a class="reference internal" href="#gaze" id="id14">gaze</a></li>
-<li><a class="reference internal" href="#chest" id="id15">chest</a></li>
+<li><a class="reference internal" href="#torso" id="id15">torso</a></li>
 <li><a class="reference internal" href="#map-and-odom" id="id16">map and odom</a></li>
 </ul>
 </li>
@@ -454,8 +454,15 @@ for frames.</p>
 </div>
 <div class="section" id="base-footprint">
 <h3><a class="toc-backref" href="#id8">base_footprint</a></h3>
-<p>The coordinate frame called <tt class="docutils literal">base_footprint</tt> projects the
-<tt class="docutils literal">base_link</tt> position on the floor.</p>
+<p>The <tt class="docutils literal">base_footprint</tt> is the representation of the robot position on
+the floor. The floor is usually the level where the supporting leg rests,
+i.e. z = min(l_sole_z, r_sole_z) where l_sole_z and r_sole_z are the left
+and right sole height respecitvely. The translation component of the frame
+should be the barycenter of the feet projections on the floor. With respect
+to the <tt class="docutils literal">odom</tt> frame, the roll and pitch angles should be zero and the
+yaw angle should correspond to the <tt class="docutils literal">base_link</tt> yaw angle.</p>
+<p>Rationale: <cite>base_footprint`</cite> provides a fairly stable 2D planar representation
+of the humanoid even while walking and swaying with the <tt class="docutils literal">base_link</tt>.</p>
 </div>
 <div class="section" id="l-wrist-and-r-wrist">
 <h3><a class="toc-backref" href="#id9">l_wrist and r_wrist</a></h3>
@@ -470,11 +477,10 @@ frame for the right arm.</p>
 <p>The coordinate frame called <tt class="docutils literal">l_hand</tt> defines the position and
 orientation of the left arm end effector.</p>
 <p>If the end effector is a grasping device, the frame should be located
-at the recommended object grasping location.  In this particular case,
-the frame orientation is defined as follow. The X axis should be
-collinear with the grasped object principal axis. For instance, when
-grasping a bottle, the X axis would be vertical. The Y axis is going
-&quot;toward&quot; the reached object and Z is orthogonal to the (X,Y) plan.</p>
+at the recommended object grasping location. The frame orientation is
+defined as X the axis which should be collinear with the object axis
+during the grasping process, Y the axis going &quot;toward&quot; the reached
+object and Z the axis orthogonal to the (X,Y) plan.</p>
 <p>The coordinate frame called <tt class="docutils literal">r_hand</tt> defines the equivalent frame
 for the right arm.</p>
 </div>
@@ -488,10 +494,11 @@ frame for the right leg.</p>
 <div class="section" id="l-sole-and-r-sole">
 <h3><a class="toc-backref" href="#id12">l_sole and r_sole</a></h3>
 <p>The coordinate frame called <tt class="docutils literal">l_sole</tt> defines the position and
-orientation of the left leg support body. The (X,Y) plan of this frame
+orientation of the left leg support body. The (X,Y) plane of this frame
 must be coplanar with the support body contact surface. It is
 recommended to choose the origin as the projection of the body center
-on the contact surface.</p>
+on the contact surface. The z coordinate of this frame should be on the
+ground level when standing.</p>
 <p>The coordinate frame called <tt class="docutils literal">r_sole</tt> defines the equivalent
 frame for the right leg.</p>
 </div>
@@ -511,9 +518,9 @@ for the right leg.</p>
 orientation. The orientation indicates in which direction the head
 appears to be looking regardless of any sensors (camera for instance).</p>
 </div>
-<div class="section" id="chest">
-<h3><a class="toc-backref" href="#id15">chest</a></h3>
-<p>The coordinate frame called <tt class="docutils literal">chest</tt> is attached to the lowest body
+<div class="section" id="torso">
+<h3><a class="toc-backref" href="#id15">torso</a></h3>
+<p>The coordinate frame called <tt class="docutils literal">torso</tt> is attached to the lowest body
 of the model which is a parent of <tt class="docutils literal">l_hand</tt>, <tt class="docutils literal">r_hand</tt> and
 <tt class="docutils literal">gaze</tt>.</p>
 </div>
@@ -524,18 +531,34 @@ of the model which is a parent of <tt class="docutils literal">l_hand</tt>, <tt 
 </div>
 <div class="section" id="frame-hierarchy">
 <h2><a class="toc-backref" href="#id17">Frame Hierarchy</a></h2>
-<ul class="simple">
-<li><tt class="docutils literal">base_link</tt> &lt;-- <tt class="docutils literal">chest</tt> &lt;-- <tt class="docutils literal">gaze</tt></li>
-<li><tt class="docutils literal">base_link</tt> &lt;-- <tt class="docutils literal">chest</tt> &lt;-- <tt class="docutils literal">l_wrist</tt> &lt;-- <tt class="docutils literal">l_hand</tt></li>
-<li><tt class="docutils literal">base_link</tt> &lt;-- <tt class="docutils literal">chest</tt> &lt;-- <tt class="docutils literal">r_wrist</tt> &lt;-- <tt class="docutils literal">r_hand</tt></li>
-<li><tt class="docutils literal">base_link</tt> &lt;-- <tt class="docutils literal">l_ankle</tt> &lt;-- <tt class="docutils literal">l_sole</tt> &lt;-- <tt class="docutils literal">l_toe</tt></li>
-<li><tt class="docutils literal">base_link</tt> &lt;-- <tt class="docutils literal">r_ankle</tt> &lt;-- <tt class="docutils literal">r_sole</tt> &lt;-- <tt class="docutils literal">r_toe</tt></li>
+<ul>
+<li><dl class="first docutils">
+<dt>base_link</dt>
+<dd><ul class="first last">
+<li><p class="first">base_footprint</p>
+</li>
+<li><p class="first">... - (l|r)_ankle - (l_r)_sole - (l|r)_toe</p>
+</li>
+<li><dl class="first docutils">
+<dt>torso</dt>
+<dd><ul class="first last simple">
+<li>... - gaze</li>
+<li>... - (l|r)_wrist - (l|r)_hand</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <div class="section" id="frame-authorities">
 <h2><a class="toc-backref" href="#id18">Frame Authorities</a></h2>
-<p>The transformation from <tt class="docutils literal">base_link</tt> to <tt class="docutils literal">base_footprint</tt> is not
-rigid on humanoid robots and is broadcasted by an external node.</p>
+<p>Unlike most mobile bases, the transformation from <tt class="docutils literal">base_link</tt> to
+<tt class="docutils literal">base_footprint</tt> is not rigid on humanoid robots and is broadcasted by
+an external node.</p>
 </div>
 <div class="section" id="exceptions">
 <h2><a class="toc-backref" href="#id19">Exceptions</a></h2>
