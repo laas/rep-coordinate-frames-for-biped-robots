@@ -85,6 +85,13 @@ defined as X the axis which should be collinear with the object axis
 during the grasping process, Y the axis going "toward" the reached
 object and Z the axis orthogonal to the (X,Y) plan.
 
+.. image:: rep-0120-1.jpg
+   :scale: 50
+   :alt: Gripper frame (Y, Z) plane
+.. image:: rep-0120-2.jpg
+   :scale: 50
+   :alt: Gripper frame (X, Y) plane
+
 
 The coordinate frame called ``r_gripper`` defines the equivalent frame
 for the right arm.
