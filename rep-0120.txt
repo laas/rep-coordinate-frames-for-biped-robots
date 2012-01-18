@@ -49,8 +49,18 @@ for frames.
 base_footprint
 ''''''''''''''
 
-The coordinate frame called ``base_footprint`` projects the
-``base_link`` position on the floor.
+The ``base_footprint`` is the representation of the robot position on
+the floor. The floor is usually the level where the supporting leg rests,
+i.e. z = min(l_sole_z, r_sole_z) where l_sole_z and r_sole_z are the left
+and right sole height respecitvely. The translation component of the frame
+should be the barycenter of the feet projections on the floor. With respect
+to the ``odom`` frame, the roll and pitch angles should be zero and the
+yaw angle should correspond to the ``base_link`` yaw angle.
+
+Rationale: `base_footprint`` provides a fairly stable 2D planar representation
+of the humanoid even while walking and swaying with the ``base_link``.
+
+
 
 l_wrist and r_wrist
 '''''''''''''''''''
@@ -70,11 +80,10 @@ The coordinate frame called ``l_hand`` defines the position and
 orientation of the left arm end effector.
 
 If the end effector is a grasping device, the frame should be located
-at the recommended object grasping location.  In this particular case,
-the frame orientation is defined as follow. The X axis should be
-collinear with the grasped object principal axis. For instance, when
-grasping a bottle, the X axis would be vertical. The Y axis is going
-"toward" the reached object and Z is orthogonal to the (X,Y) plan.
+at the recommended object grasping location. The frame orientation is
+defined as X the axis which should be collinear with the object axis
+during the grasping process, Y the axis going "toward" the reached
+object and Z the axis orthogonal to the (X,Y) plan.
 
 
 The coordinate frame called ``r_hand`` defines the equivalent frame
@@ -96,10 +105,11 @@ l_sole and r_sole
 '''''''''''''''''
 
 The coordinate frame called ``l_sole`` defines the position and
-orientation of the left leg support body. The (X,Y) plan of this frame
+orientation of the left leg support body. The (X,Y) plane of this frame
 must be coplanar with the support body contact surface. It is
 recommended to choose the origin as the projection of the body center
-on the contact surface.
+on the contact surface. The z coordinate of this frame should be on the
+ground level when standing.
 
 
 The coordinate frame called ``r_sole`` defines the equivalent
@@ -128,10 +138,10 @@ orientation. The orientation indicates in which direction the head
 appears to be looking regardless of any sensors (camera for instance).
 
 
-chest
+torso
 '''''
 
-The coordinate frame called ``chest`` is attached to the lowest body
+The coordinate frame called ``torso`` is attached to the lowest body
 of the model which is a parent of ``l_hand``, ``r_hand`` and
 ``gaze``.
 
@@ -145,17 +155,23 @@ See REP 105 [1] for ``map`` and ``odom`` frames definition.
 Frame Hierarchy
 ---------------
 
-- ``base_link`` <-- ``chest`` <-- ``gaze``
-- ``base_link`` <-- ``chest`` <-- ``l_wrist`` <-- ``l_hand``
-- ``base_link`` <-- ``chest`` <-- ``r_wrist`` <-- ``r_hand``
-- ``base_link`` <-- ``l_ankle`` <-- ``l_sole`` <-- ``l_toe``
-- ``base_link`` <-- ``r_ankle`` <-- ``r_sole`` <-- ``r_toe``
+
+- base_link
+   - base_footprint
+   - ... - (l|r)_ankle - (l_r)_sole - (l|r)_toe
+   - torso
+      - ... - gaze
+      - ... - (l|r)_wrist - (l|r)_hand
+
+
+
 
 Frame Authorities
 -----------------
 
-The transformation from ``base_link`` to ``base_footprint`` is not
-rigid on humanoid robots and is broadcasted by an external node.
+Unlike most mobile bases, the transformation from ``base_link`` to
+``base_footprint`` is not rigid on humanoid robots and is broadcasted by
+an external node.
 
 
 Exceptions
