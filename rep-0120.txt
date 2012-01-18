@@ -73,10 +73,10 @@ The coordinate frame called ``r_wrist`` defines the equivalent
 frame for the right arm.
 
 
-l_hand and r_hand
-'''''''''''''''''
+l_gripper and r_gripper
+'''''''''''''''''''''''
 
-The coordinate frame called ``l_hand`` defines the position and
+The coordinate frame called ``l_gripper`` defines the position and
 orientation of the left arm end effector.
 
 If the end effector is a grasping device, the frame should be located
@@ -86,7 +86,7 @@ during the grasping process, Y the axis going "toward" the reached
 object and Z the axis orthogonal to the (X,Y) plan.
 
 
-The coordinate frame called ``r_hand`` defines the equivalent frame
+The coordinate frame called ``r_gripper`` defines the equivalent frame
 for the right arm.
 
 
@@ -142,7 +142,7 @@ torso
 '''''
 
 The coordinate frame called ``torso`` is attached to the lowest body
-of the model which is a parent of ``l_hand``, ``r_hand`` and
+of the model which is a parent of ``l_gripper``, ``r_gripper`` and
 ``gaze``.
 
 
@@ -161,7 +161,7 @@ Frame Hierarchy
    - ... - (l|r)_ankle - (l_r)_sole - (l|r)_toe
    - torso
       - ... - gaze
-      - ... - (l|r)_wrist - (l|r)_hand
+      - ... - (l|r)_wrist - (l|r)_gripper
 
 
 
