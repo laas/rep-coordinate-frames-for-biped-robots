@@ -478,11 +478,8 @@ frame for the right arm.</p>
 orientation of the left arm end effector.</p>
 <p>If the end effector is a grasping device, the frame should be located
 at the recommended object grasping location. The frame orientation is
-defined as X the axis which should be collinear with the object axis
-during the grasping process, Y the axis going &quot;toward&quot; the reached
-object and Z the axis orthogonal to the (X,Y) plan.</p>
-<img alt="Gripper frame (Y, Z) plane" src="rep-0120-1.jpg" style="width: 375.0px; height: 410.0px;" />
-<img alt="Gripper frame (X, Y) plane" src="rep-0120-2.jpg" style="width: 553.5px; height: 515.0px;" />
+defined as X the axis going &quot;toward&quot; the object. Y the main dimension
+in which the grasping device moves and Z orthogonal to X and Y axes.</p>
 <p>The coordinate frame called <tt class="docutils literal">r_gripper</tt> defines the equivalent frame
 for the right arm.</p>
 </div>
@@ -496,18 +493,18 @@ frame for the right leg.</p>
 <div class="section" id="l-sole-and-r-sole">
 <h3><a class="toc-backref" href="#id12">l_sole and r_sole</a></h3>
 <p>The coordinate frame called <tt class="docutils literal">l_sole</tt> defines the position and
-orientation of the left leg support body. The (X,Y) plane of this frame
-must be coplanar with the support body contact surface. It is
-recommended to choose the origin as the projection of the body center
-on the contact surface. The z coordinate of this frame should be on the
-ground level when standing.</p>
+orientation of the left leg support body. The (X,Y) plane of this
+frame must be coplanar with the support body contact surface. It is
+recommended to choose the origin as the projection of the support body
+origin on the contact surface. The Z coordinate of this frame should
+be on the ground level when standing.</p>
 <p>The coordinate frame called <tt class="docutils literal">r_sole</tt> defines the equivalent
 frame for the right leg.</p>
 </div>
 <div class="section" id="l-toe-and-r-toe">
 <h3><a class="toc-backref" href="#id13">l_toe and r_toe</a></h3>
 <p>The coordinate frame called <tt class="docutils literal">l_toe</tt> defines the position and
-orientation of the left leg toe body. The (X,Y) plane of this frame
+orientation of the left leg toe body. The (X,Y) plan of this frame
 must be coplanar with the toe body contact surface. It is recommended
 to choose the origin as the projection of the body center on the
 contact surface.</p>
@@ -539,10 +536,10 @@ of the model which is a parent of <tt class="docutils literal">l_gripper</tt>, <
 <dd><ul class="first last">
 <li><p class="first">base_footprint</p>
 </li>
-<li><p class="first">... - (l|r)_ankle - (l|r)_sole - (l|r)_toe</p>
+<li><p class="first">... - (l|r)_ankle - (l_r)_sole - (l|r)_toe</p>
 </li>
 <li><dl class="first docutils">
-<dt>torso</dt>
+<dt>... - torso</dt>
 <dd><ul class="first last simple">
 <li>... - gaze</li>
 <li>... - (l|r)_wrist - (l|r)_gripper</li>
